@@ -1,0 +1,4 @@
+node_modules
+.prettierignore
+
+src/public/css
