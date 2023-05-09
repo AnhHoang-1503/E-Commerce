@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 const uri =
-    "mongodb+srv://hoang:AnhHoang1503@e-commerce.giaof8k.mongodb.net/?retryWrites=true&w=majority";
+    "mongodb+srv://hoang:AnhHoang1503@e-commerce.giaof8k.mongodb.net/E-Commerce?retryWrites=true&w=majority";
 
 async function connect() {
     try {
