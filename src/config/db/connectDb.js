@@ -1,11 +1,13 @@
 import mongoose from "mongoose";
+const uri =
+    "mongodb+srv://hoang:AnhHoang1503@e-commerce.giaof8k.mongodb.net/?retryWrites=true&w=majority";
 
 async function connect() {
     try {
-        await mongoose.connect("mongodb://127.0.0.1:27017/Blog_dev");
+        await mongoose.connect(uri);
         console.log("Successfully connected!!!");
     } catch (error) {
-        console.log(error);
+        console.log("Connect DB failure!!!", error);
     }
 }
 

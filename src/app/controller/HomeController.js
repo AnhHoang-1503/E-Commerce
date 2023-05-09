@@ -1,8 +1,5 @@
-class HomeController {
-    // [GET] /
-    index(req, res, next) {
-        res.render("home");
-    }
-}
+const index = function (req, res, next) {
+    res.render("home");
+};
 
-export default new HomeController();
+export default { index };

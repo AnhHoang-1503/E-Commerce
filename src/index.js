@@ -22,7 +22,7 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, "public")));
 
 // HTTP logger
-app.use(logger("combined"));
+// app.use(logger("combined"));
 
 // set view
 app.engine(
@@ -38,7 +38,7 @@ app.set("views", path.join(__dirname, "resources", "view"));
 router(app);
 
 // connect to mongo DB
-connect();
+// connect();
 
 // app listen
 app.listen(port, () => {
