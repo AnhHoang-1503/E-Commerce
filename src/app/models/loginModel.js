@@ -9,6 +9,7 @@ const LoginSchema = new Schema(
     },
     {
         collection: "login",
+        timestamps: true,
     }
 );
 
