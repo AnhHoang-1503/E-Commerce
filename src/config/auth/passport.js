@@ -1,7 +1,7 @@
 import passport from "passport";
 import LocalStrategy from "passport-local";
 import Login from "../../app/models/loginModel.js";
-import hasher from "../../app/authentication/hasher.js";
+import hasher from "../../util/hasher.js";
 
 function passportConfig(passport) {
     // passport session setup
@@ -22,19 +22,20 @@ function passportConfig(passport) {
 
     passport.use(
         new LocalStrategy(
-            { usernameField: "email" },
-            (email, password, done) => {
+            { usernameField: "email", passReqToCallback: true },
+            (req, email, password, done) => {
                 Login.findOne({ email: email })
                     .then(function (user) {
-                        hasher(password, user.salt).then((output) => {
-                            if (output.hash === user.hash) {
-                                return done(null, user);
-                            } else {
-                                return done(null, false, {
-                                    message:
-                                        "Sai thông tin username hoặc password",
-                                });
-                            }
+                        if (user !== null) {
+                            hasher(password, user.salt).then((output) => {
+                                if (output.hash === user.hash) {
+                                    return done(null, user);
+                                }
+                            });
+                        }
+                        req.session.messages = [];
+                        return done(null, false, {
+                            message: "Sai thông tin username hoặc password",
                         });
                     })
                     .catch(function (err) {

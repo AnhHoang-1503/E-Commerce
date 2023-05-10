@@ -9,8 +9,9 @@ router
     .get(accountController.login)
     .post(
         passport.authenticate("local", {
-            failureRedirect: "/account/login",
             successRedirect: "/",
+            failureMessage: true,
+            failureRedirect: "/account/login",
         })
     );
 

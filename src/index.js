@@ -39,6 +39,10 @@ app.use(
 );
 app.use(express.static(path.join(__dirname, "public"))); // set static file
 app.use(logger(":method :url")); // set logger
+app.use(function (req, res, next) {
+    res.locals.session = req.session;
+    next();
+});
 
 // set router
 router(app);
