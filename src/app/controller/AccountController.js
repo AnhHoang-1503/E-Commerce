@@ -1,6 +1,6 @@
 import Login from "../models/loginModel.js";
 import User from "../models/userModel.js";
-import hasher from "../authentication/hasher.js";
+import hasher from "../../util/hasher.js";
 import {
     mutipleMongooseToObject,
     mongooseToObject,
@@ -10,15 +10,6 @@ import { ObjectId } from "mongodb";
 // GET account/login
 function login(req, res, next) {
     res.render("login", { title: "Login" });
-}
-
-// POST account/login
-function loginPost(req, res, next) {
-    console.log(req.session);
-    Login.findOne({ email: req.body.email }).then((account) => {
-        account = mongooseToObject(account);
-        res.json(account);
-    });
 }
 
 // GET account/register
@@ -36,22 +27,25 @@ async function registerPost(req, res, next) {
         if (!account) {
             const output = await hasher(data.password);
             const newObjectId = new ObjectId();
+            // create login
             await Login.create({
                 _id: newObjectId,
                 email: data.email,
                 hash: output.hash,
                 salt: output.salt,
             });
+            // create user
             await User.create({
                 _id: newObjectId,
                 email: data.email,
+                firstName: data.firstName,
+                lastName: data.lastName,
             });
             res.redirect("/account/login");
         } else {
-            res.render("register", {
-                title: "Create account",
-                message: "Email already exists",
-            });
+            req.session.messages = [];
+            req.session.messages.push("Email already exists");
+            res.render("register", { title: "Create account" });
         }
     } catch (error) {
         next(error);
@@ -65,4 +59,4 @@ function logout(req, res, next) {
     });
 }
 
-export default { login, loginPost, register, registerPost, logout };
+export default { login, register, registerPost, logout };

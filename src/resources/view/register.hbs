@@ -1,6 +1,14 @@
 <form id="login-form" class="ms-4" method="post" action="">
     <div class="mb-3">
-        <p>{{message}}</p>
+        <p>{{session.messages}}</p>
+        <label for="firstName" class="form-label">First Name</label>
+        <input name="firstName" type="text" class="form-control" id="firstName">
+    </div>
+    <div class="mb-3">
+        <label for="lastName" class="form-label">Last Name</label>
+        <input name="lastName" type="text" class="form-control" id="lastName">
+    </div>
+    <div class="mb-3">
         <label for="EmailLogin" class="form-label">Email</label>
         <input name="email" type="text" class="form-control" id="EmailLogin">
     </div>
