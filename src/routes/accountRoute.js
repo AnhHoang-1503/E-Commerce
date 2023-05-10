@@ -12,7 +12,10 @@ router
             successRedirect: "/",
             failureMessage: true,
             failureRedirect: "/account/login",
-        })
+        }),
+        function (req, res) {
+            res.redirect("/");
+        }
     );
 
 router
@@ -21,5 +24,7 @@ router
     .post(accountController.registerPost);
 
 router.route("/logout").post(accountController.logout);
+
+router.route("/").get(accountController.index);
 
 export default router;

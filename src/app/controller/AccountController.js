@@ -9,12 +9,12 @@ import { ObjectId } from "mongodb";
 
 // GET account/login
 function login(req, res, next) {
-    res.render("login", { title: "Login" });
+    res.render("account/login", { title: "Login" });
 }
 
 // GET account/register
 function register(req, res, next) {
-    res.render("register", { title: "Create account" });
+    res.render("account/register", { title: "Create account" });
 }
 
 // POST account/register
@@ -52,11 +52,18 @@ async function registerPost(req, res, next) {
     }
 }
 
-// post account/logout
+// POST account/logout
 function logout(req, res, next) {
     req.session.destroy(function () {
         res.redirect("/account/login");
     });
 }
 
-export default { login, register, registerPost, logout };
+// GET account/
+function index(req, res, next) {
+    if (res.locals.session.passport == undefined)
+        res.redirect("/account/login");
+    res.json(res.locals.session.passport.user);
+}
+
+export default { login, register, registerPost, logout, index };

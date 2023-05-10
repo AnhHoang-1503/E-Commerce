@@ -1,5 +1,5 @@
 const index = function (req, res, next) {
-    res.render("home", req.session.passport);
+    res.render("home", { title: "Home" });
 };
 
 export default { index };
