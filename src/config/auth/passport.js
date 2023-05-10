@@ -24,6 +24,7 @@ function passportConfig(passport) {
         new LocalStrategy(
             { usernameField: "email", passReqToCallback: true },
             (req, email, password, done) => {
+                req.session.messages = [];
                 Login.findOne({ email: email })
                     .then(function (user) {
                         if (user !== null) {
@@ -32,11 +33,11 @@ function passportConfig(passport) {
                                     return done(null, user);
                                 }
                             });
+                        } else {
+                            return done(null, false, {
+                                message: "Sai thông tin username hoặc password",
+                            });
                         }
-                        req.session.messages = [];
-                        return done(null, false, {
-                            message: "Sai thông tin username hoặc password",
-                        });
                     })
                     .catch(function (err) {
                         return done(err);
