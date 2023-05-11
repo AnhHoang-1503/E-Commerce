@@ -8,6 +8,12 @@ import handlebars from "express-handlebars";
 import logger from "morgan";
 import router from "./routes/indexRoute.js";
 import connect from "./config/db/connectDb.js";
+<<<<<<< Updated upstream
+=======
+import session from "express-session";
+import passport from "passport";
+import passportConfig from "./config/auth/passport.js";
+>>>>>>> Stashed changes
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 

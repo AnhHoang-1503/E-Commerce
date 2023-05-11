@@ -1,1 +1,35 @@
 @import "variable";
+
+* {
+    font-family: "Source Serif Pro", serif;
+}
+
+a {
+    color: black;
+    text-decoration: inherit;
+}
+
+i {
+    margin-left: 20px;
+    font-size: 30px;
+}
+
+#menuSideBar {
+    width: 40%;
+}
+
+#cartSideBar {
+    width: 40%;
+}
+
+ul {
+    list-style-type: none;
+}
+
+footer {
+    background-color: #beebf5;
+}
+
+header {
+    background-color: #fff;
+}

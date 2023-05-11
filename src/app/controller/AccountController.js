@@ -23,8 +23,47 @@ const registerPost = function (req, res, next) {
                 salt: output.salt,
                 hash: output.hash,
             });
+<<<<<<< Updated upstream
         })
         .catch(next);
 };
 
 export default { login, loginPost, register, registerPost };
+=======
+            // create user
+            await User.create({
+                _id: newObjectId,
+                email: data.email,
+                firstName: data.firstName,
+                lastName: data.lastName,
+                role: "user",
+            });
+            res.redirect("/account/login");
+        } else {
+            req.session.messages = [];
+            req.session.messages.push("Email already exists");
+            res.render("register", { title: "Create account" });
+        }
+    } catch (error) {
+        next(error);
+    }
+}
+
+// POST account/logout
+function logout(req, res, next) {
+    req.session.destroy(function () {
+        res.redirect("/account/login");
+    });
+}
+
+// GET account/
+function index(req, res, next) {
+    if (res.locals.session.passport == undefined) {
+        res.redirect("/account/login");
+    } else {
+        res.json(res.locals.session.passport.user);
+    }
+}
+
+export default { login, register, registerPost, logout, index };
+>>>>>>> Stashed changes
