@@ -1,15 +1,81 @@
 <header>
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <nav class="navbar navbar-expand-lg navbar-light bg-white"></nav>
     <div class="row" style="width: 100%">
-        <div class="col col-lg-5 d-flex justify-content-start align-self-center">test</div>
+        <div class="col col-lg-5 d-flex justify-content-start align-self-center">
+            <a data-bs-toggle="offcanvas" href="#menuSideBar" role="button">
+                <i class="bi bi-list"></i>
+            </a>
+        </div>
         <div class="col col-lg-2 d-flex justify-content-center align-self-center">
             <a href="/">
                 <img src="https://www.glasslizzard.com/cdn/shop/files/full_logo.png?v=1672484078&width=300" alt="glasslizzard" height="62px">
             </a>
         </div>
         <div class="col col-lg-5 d-flex justify-content-end align-self-center">
-            <div class="">test</div>
+            <div class="ms-3">
+                <a href="/account">
+                    <i class="bi bi-person"></i>
+                </a>
+                <a href="">
+                    <i class="bi bi-search"></i>
+                </a>
+                <a data-bs-toggle="offcanvas" href="#cartSideBar" role="button">
+                    <i class="bi bi-bag"></i>
+                </a>
+            </div>
         </div>
     </div>
     </nav>
 </header>
+
+{{!-- Menu sidebar left --}}
+<div class="offcanvas offcanvas-start" tabindex="-1" id="menuSideBar">
+    <div class="offcanvas-header">
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+    </div>
+    <div class="offcanvas-body mt-2">
+        <div class="fs-3" style="font-weight: 2000;">
+            <a href="/">Home</a>
+        </div>
+        <div class="fs-3" style="font-weight: 2000;">
+            <a href="/collections">Shop</a>
+        </div>
+        <div style="font-weight: 2000;">
+            <a class="fs-3" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                About
+            </a>
+            <div class="collapse" id="collapseExample">
+                <ul class="fs-4">
+                    <li>test</li>
+                    <li>test</li>
+                </ul>
+            </div>
+        </div>
+        <div class="fs-3" style="font-weight: 2000;">
+            <a href="/">Blog</a>
+        </div>
+    </div>
+</div>
+
+{{!-- Cart side bar right --}}
+<div class="offcanvas offcanvas-end" tabindex="-1" id="cartSideBar">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="offcanvasExampleLabel"></h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+  </div>
+  <div class="offcanvas-body">
+    <div>
+      Some text as placeholder. In real life you can have the elements you have chosen. Like, text, images, lists, etc.
+    </div>
+    <div class="dropdown mt-3">
+      <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+        Dropdown button
+      </button>
+      <ul class="dropdown-menu">
+        <li><a class="dropdown-item" href="#">Action</a></li>
+        <li><a class="dropdown-item" href="#">Another action</a></li>
+        <li><a class="dropdown-item" href="#">Something else here</a></li>
+      </ul>
+    </div>
+  </div>
+</div>

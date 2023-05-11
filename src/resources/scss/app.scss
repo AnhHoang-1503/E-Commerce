@@ -1,1 +1,47 @@
 @import "variable";
+
+* {
+    font-family: "Source Code Pro", monospace;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    position: relative;
+}
+
+a {
+    color: black;
+    text-decoration: inherit;
+}
+
+i {
+    margin-left: 20px;
+    font-size: 30px;
+}
+
+#menuSideBar {
+    width: 40%;
+}
+
+#cartSideBar {
+    width: 40%;
+}
+
+ul {
+    list-style-type: none;
+    padding-left: 15px;
+    margin-bottom: 0;
+}
+
+footer {
+    background-color: #beebf5;
+    bottom: 0;
+    width: 100%;
+    position: absolute;
+}
+
+header {
+    background-color: #fff;
+}
