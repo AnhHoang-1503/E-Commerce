@@ -1,5 +1,10 @@
 <header>
-    <nav class="navbar navbar-expand-lg navbar-light bg-white"></nav>
+    <div class="searchField d-flex justify-content-center align-self-center">
+        <i class="bi bi-search"></i>
+        <input id="searchInput" type="text" placeholder="Search">
+        <button id="closeSearchBtn" type="button" class="btn-close" style="margin-top: 5px;"></button>
+    </div>
+    <nav class="navbar navbar-expand-lg navbar-light bg-white">
     <div class="row" style="width: 100%">
         <div class="col col-lg-5 d-flex justify-content-start align-self-center">
             <a data-bs-toggle="offcanvas" href="#menuSideBar" role="button">
@@ -8,7 +13,7 @@
         </div>
         <div class="col col-lg-2 d-flex justify-content-center align-self-center">
             <a href="/">
-                <img src="https://www.glasslizzard.com/cdn/shop/files/full_logo.png?v=1672484078&width=300" alt="glasslizzard" height="62px">
+                <img src="/img/logo.png" alt="glasslizzard" height="62px">
             </a>
         </div>
         <div class="col col-lg-5 d-flex justify-content-end align-self-center">
@@ -16,9 +21,7 @@
                 <a href="/account">
                     <i class="bi bi-person"></i>
                 </a>
-                <a href="">
-                    <i class="bi bi-search"></i>
-                </a>
+                <i class="bi bi-search" id="searchBtn"></i>
                 <a data-bs-toggle="offcanvas" href="#cartSideBar" role="button">
                     <i class="bi bi-bag"></i>
                 </a>
@@ -33,26 +36,67 @@
     <div class="offcanvas-header">
         <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
     </div>
-    <div class="offcanvas-body mt-2">
-        <div class="fs-3" style="font-weight: 2000;">
-            <a href="/">Home</a>
-        </div>
-        <div class="fs-3" style="font-weight: 2000;">
-            <a href="/collections">Shop</a>
-        </div>
-        <div style="font-weight: 2000;">
-            <a class="fs-3" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+    <div class="offcanvas-body mt-2 ms-4">
+        <a href="/">
+        <div class="fs-3" style="width: 100%;">Home</div>
+        </a>
+        <a href="/collections">
+        <div class="fs-3" style="width: 100%;">Shop</div>
+        </a>
+        <a id="aboutSideBar" style="width: 100%;" data-bs-toggle="collapse" href="#aboutList" role="button" aria-expanded="false" aria-controls="collapseExample">
+            <div class="fs-3 d-flex">
                 About
-            </a>
-            <div class="collapse" id="collapseExample">
-                <ul class="fs-4">
-                    <li>test</li>
-                    <li>test</li>
-                </ul>
+                <div class="d-flex align-self-center justify-content-end" style="width: 100%; box-sizing: border-box;">
+                    <i class="bi bi-chevron-compact-down"></i>
+                </div>
             </div>
+        </a>
+        <div class="collapse" id="aboutList" style="margin-bottom: 20px;">
+            <ul class="fs-4" style="font-weight: 300;">
+                <li>
+                    <a href="/pages/about">
+                        <div style="width: 100%">
+                            About Us
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="/pages/faq">
+                        <div class="" style="width: 100%">
+                            FAQ
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="/pages/contact">
+                        <div class="" style="width: 100%">
+                            Contact Us
+                        </div>
+                    </a>
+                </li>
+            </ul>
         </div>
-        <div class="fs-3" style="font-weight: 2000;">
-            <a href="/">Blog</a>
+        <a href="/blog">
+            <div class="fs-3" style="width: 100%;">Blog</div>
+        </a>
+        <div id="acccountSideBar" class="mt-2">
+        </div>
+        <form class="mt-4" action="">
+            <input id="searchSideBar" type="text" placeholder="Search">
+            <button>
+                <i class="bi bi-search" style="font-size: 24px;"></i>
+            </button>
+        </form>
+        <div class="mt-4">
+            <a href="">
+                <i style="font-size: 30px; margin-right: 20px" class="fab fa-facebook-f"></i>
+            </a>
+            <a href="">
+                <i style="font-size: 30px; margin-right: 20px" class="fab fa-twitter"></i>
+            </a>
+            <a href="">
+                <i style="font-size: 30px; margin-right: 20px" class="fab fa-instagram"></i>
+            </a>
         </div>
     </div>
 </div>
@@ -60,22 +104,51 @@
 {{!-- Cart side bar right --}}
 <div class="offcanvas offcanvas-end" tabindex="-1" id="cartSideBar">
   <div class="offcanvas-header">
-    <h5 class="offcanvas-title" id="offcanvasExampleLabel"></h5>
+    <h5 class="offcanvas-title fs-3" id="offcanvasExampleLabel">Your Cart</h5>
     <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
   </div>
   <div class="offcanvas-body">
-    <div>
-      Some text as placeholder. In real life you can have the elements you have chosen. Like, text, images, lists, etc.
-    </div>
-    <div class="dropdown mt-3">
-      <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
-        Dropdown button
-      </button>
-      <ul class="dropdown-menu">
-        <li><a class="dropdown-item" href="#">Action</a></li>
-        <li><a class="dropdown-item" href="#">Another action</a></li>
-        <li><a class="dropdown-item" href="#">Something else here</a></li>
-      </ul>
+    <div class="d-flex justify-content-center align-items-center fs-4" style="font-weight: 300;">
+        Your cart is currently empty.
     </div>
   </div>
 </div>
+{{!-- log out form --}}
+<form id="logoutForm" method="post" action="/account/logout"></form>
+
+<script>
+    if ("{{session.passport.user}}") {
+    acccountSideBar.innerHTML = `
+            <ul class="fs-4" style="font-weight: 300; padding-left: 0">
+                <li>
+                    <a href="/account">
+                        Account
+                    </a>
+                </li>
+                <li>
+                    <button type="submit" form="logoutForm">
+                        Log out
+                    </button>
+                </li>
+            </ul>
+            `;
+} else {
+    acccountSideBar.innerHTML = `
+            <ul class="fs-4" style="font-weight: 300; padding-left: 0">
+                <li>
+                    <a href="/account/login">
+                        Log in
+                    </a>
+                </li>
+                <li>
+                    <a href="/account/register">
+                        Create account
+                    </a>
+                </li>
+            </ul>
+            `;
+}
+</script>
+<script src="/script/header.js"></script>    
+
+

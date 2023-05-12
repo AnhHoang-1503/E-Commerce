@@ -1,13 +1,27 @@
-<form id="login-form" class="ms-4" method="post" action="">
-    <div class="mb-3">
-        <p>{{session.messages}}</p>
-        <label for="EmailLogin" class="form-label">Email</label>
-        <input name="email" type="text" class="form-control" id="EmailLogin">
+<div style="width:400px; margin:auto">
+    <div class="d-flex justify-content-between">
+        <h1>Login</h1>
+        <a href="/account/register" class="accountBtn">Create account</a>
     </div>
-    <div class="mb-3">
-        <label for="password" class="form-label">Password</label>
-        <input name="password" type="password" class="form-control" id="password">
+    <div class="d-flex justify-content-center align-items-center" style="width: 100%;">
+        <form id="login-form" method="post" action="" style="width:100%">
+            <div class="mb-3">
+                <p>{{message}}</p>
+                <label for="EmailLogin" class="form-label">Email</label>
+                <input name="email" type="text" class="form-control" id="EmailLogin">
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input name="password" type="password" class="form-control" id="password">
+            </div>
+            <button type="submit" class="accountBtn mt-4" style="width: 100%;">Sign In</button>
+        </form>
     </div>
-    <button type="submit" class="btn btn-primary">login</button>
-    <a href="/account/register">create account</a>
-</form>
+    <div class="d-flex justify-content-center mt-2">
+        <a href="/">Return to Store</a>
+    </div>
+    <div class="d-flex justify-content-center mt-2">
+        <a href="/account/resetpassword">Forgot your password?</a>
+    </div>
+</div>
+

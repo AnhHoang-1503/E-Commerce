@@ -1,12 +1,18 @@
-import passport from "passport";
 import LocalStrategy from "passport-local";
 import Login from "../../app/models/loginModel.js";
 import hasher from "../../util/hasher.js";
+import User from "../../app/models/userModel.js";
 
 function passportConfig(passport) {
     // passport session setup
     passport.serializeUser(function (user, done) {
-        done(null, user.email);
+        User.findOne({ email: user.email })
+            .then(function (user) {
+                done(null, { email: user.email, role: user.role });
+            })
+            .catch(function (err) {
+                console.log(err);
+            });
     });
 
     // used to deserialize the user
@@ -31,12 +37,14 @@ function passportConfig(passport) {
                             hasher(password, user.salt).then((output) => {
                                 if (output.hash === user.hash) {
                                     return done(null, user);
+                                } else {
+                                    req.flash("messages", "Wrong password");
+                                    return done(null, false);
                                 }
                             });
                         } else {
-                            return done(null, false, {
-                                message: "Sai thông tin username hoặc password",
-                            });
+                            req.flash("messages", "Wrong email");
+                            return done(null, false);
                         }
                     })
                     .catch(function (err) {

@@ -1,5 +1,5 @@
 import { Router } from "express";
-import accountController from "../app/controller/AccountController.js";
+import accountController from "../app/controller/accountController.js";
 import passport from "passport";
 
 const router = Router();
@@ -9,13 +9,10 @@ router
     .get(accountController.login)
     .post(
         passport.authenticate("local", {
-            successRedirect: "/",
+            successRedirect: "/account",
             failureMessage: true,
             failureRedirect: "/account/login",
-        }),
-        function (req, res) {
-            res.redirect("/");
-        }
+        })
     );
 
 router
@@ -24,6 +21,11 @@ router
     .post(accountController.registerPost);
 
 router.route("/logout").post(accountController.logout);
+
+router
+    .route("/resetpassword")
+    .get(accountController.resetPassword)
+    .patch(accountController.resetPasswordPatch);
 
 router.route("/").get(accountController.index);
 

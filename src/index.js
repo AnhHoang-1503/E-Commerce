@@ -10,8 +10,9 @@ import router from "./routes/indexRoute.js";
 import connect from "./config/db/connectDb.js";
 import session from "express-session";
 import passport from "passport";
-import bodyParser from "body-parser";
 import passportConfig from "./config/auth/passport.js";
+import methodOverride from "method-override";
+import flash from "connect-flash";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const app = express();
@@ -39,6 +40,8 @@ app.use(
 );
 app.use(express.static(path.join(__dirname, "public"))); // set static file
 app.use(logger(":method :url")); // set logger
+app.use(methodOverride("_method"));
+app.use(flash());
 app.use(function (req, res, next) {
     res.locals.session = req.session;
     next();
@@ -65,10 +68,15 @@ app.use(function (req, res, next) {
 // error handlers
 app.use(function (err, req, res, next) {
     res.status(err.status || 500);
-    res.render("error", {
-        message: err.message,
-        error: err,
-    });
+    if (err.status === 404) {
+        res.render("error", {
+            message: err.message,
+            error: err,
+            status: err.status,
+        });
+    } else {
+        res.send(err.message);
+    }
 });
 
 // app listen
