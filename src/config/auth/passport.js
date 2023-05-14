@@ -31,6 +31,7 @@ function passportConfig(passport) {
             { usernameField: "email", passReqToCallback: true },
             (req, email, password, done) => {
                 req.session.messages = [];
+                email = email.toLowerCase();
                 Login.findOne({ email: email })
                     .then(function (user) {
                         if (user !== null) {

@@ -1,6 +1,7 @@
 import { Router } from "express";
 import accountController from "../app/controller/accountController.js";
 import passport from "passport";
+import checkLogined from "../app/middleware/checkLogined.js";
 
 const router = Router();
 
@@ -27,6 +28,6 @@ router
     .get(accountController.resetPassword)
     .patch(accountController.resetPasswordPatch);
 
-router.route("/").get(accountController.index);
+router.route("/").get(checkLogined, accountController.index);
 
 export default router;

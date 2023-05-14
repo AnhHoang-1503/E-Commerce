@@ -1,5 +1,6 @@
 import Login from "../models/loginModel.js";
 import User from "../models/userModel.js";
+import Product from "../models/productModel.js";
 import hasher from "../../util/hasher.js";
 import {
     mutipleMongooseToObject,
@@ -9,36 +10,64 @@ import { ObjectId } from "mongodb";
 
 // GET account/login
 function login(req, res, next) {
-    res.render("account/login", {
-        title: "Login",
-        message: req.flash("messages")[0],
-    });
+    try {
+        res.render("account/login", {
+            title: "Login",
+            message: req.flash("messages")[0],
+        });
+    } catch (error) {
+        next(error);
+    }
 }
 
 // GET account/register
 function register(req, res, next) {
-    res.render("account/register", {
-        title: "Create account",
-        message: req.flash("messages")[0],
-    });
+    try {
+        res.render("account/register", {
+            title: "Create account",
+            message: req.flash("messages")[0],
+        });
+    } catch (error) {
+        next(error);
+    }
 }
 
 // GET account/rspass
 function resetPassword(req, res, next) {
-    res.render("account/resetPassword", {
-        title: "Reset password",
-        message: req.flash("messages")[0],
-    });
+    try {
+        res.render("account/resetPassword", {
+            title: "Reset password",
+            message: req.flash("messages")[0],
+        });
+    } catch (error) {
+        next(error);
+    }
 }
 
 // GET account/
 function index(req, res, next) {
-    if (res.locals.session.passport === undefined) {
-        res.redirect("/account/login");
-    } else if (res.locals.session.passport.user.role === "user") {
-        res.render("account/user", { title: "Acount" });
-    } else {
-        res.render("account/admin", { title: "Acount" });
+    try {
+        if (res.locals.session.passport.user.role === "user") {
+            res.render("account/user", { title: "Acount" });
+        } else {
+            admin(req, res, next);
+        }
+    } catch (error) {
+        next(error);
+    }
+}
+
+// GET account/ role = admin
+async function admin(req, res, next) {
+    try {
+        let products = await Product.find({});
+        mutipleMongooseToObject(products);
+        res.render("account/admin", {
+            title: "Acount",
+            products: mutipleMongooseToObject(products),
+        });
+    } catch (error) {
+        next(error);
     }
 }
 
@@ -46,6 +75,7 @@ function index(req, res, next) {
 async function registerPost(req, res, next) {
     try {
         const data = req.body;
+        data.email = data.email.toLowerCase();
         const account = await Login.findOne({ email: data.email });
         // check if email already exists
         if (!account) {
@@ -78,28 +108,37 @@ async function registerPost(req, res, next) {
 
 // POST account/logout
 function logout(req, res, next) {
-    req.session.destroy(function () {
-        res.redirect("/account/login");
-    });
+    try {
+        req.session.destroy(function () {
+            res.redirect("/account/login");
+        });
+    } catch (error) {
+        next(error);
+    }
 }
 
 // PATCH account/resetpassword
 async function resetPasswordPatch(req, res, next) {
-    const output = await hasher(req.body.password);
-    Login.updateOne(
-        { email: req.body.email },
-        { hash: output.hash, salt: output.salt }
-    )
-        .then(function (result) {
-            if (result.modifiedCount == 0) {
-                req.flash("messages", "Email does not exist");
-                res.redirect("/account/resetpassword");
-            } else {
-                req.flash("messages", "Password changed");
-                res.redirect("/account/login");
-            }
-        })
-        .catch(next);
+    try {
+        const email = req.body.email.toLowerCase();
+        const output = await hasher(req.body.newpassword);
+        Login.updateOne(
+            { email: email },
+            { hash: output.hash, salt: output.salt }
+        )
+            .then(function (result) {
+                if (result.modifiedCount == 0) {
+                    req.flash("messages", "Email does not exist");
+                    res.redirect("/account/resetpassword");
+                } else {
+                    req.flash("messages", "Password changed");
+                    res.redirect("/account/login");
+                }
+            })
+            .catch(next);
+    } catch (error) {
+        next(error);
+    }
 }
 
 export default {

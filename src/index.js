@@ -40,23 +40,18 @@ app.use(
 );
 app.use(express.static(path.join(__dirname, "public"))); // set static file
 app.use(logger(":method :url")); // set logger
-app.use(methodOverride("_method"));
-app.use(flash());
+app.use(methodOverride("_method")); // set method override
+app.use(flash()); // set flash
 app.use(function (req, res, next) {
     res.locals.session = req.session;
     next();
-});
-
-// set router
-router(app);
-
-// passport config
-app.use(passport.initialize());
-app.use(passport.session());
-passportConfig(passport);
+}); // set locals session
 
 // connect to mongo DB
 connect();
+
+// set router
+router(app);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
@@ -78,6 +73,11 @@ app.use(function (err, req, res, next) {
         res.send(err.message);
     }
 });
+
+// passport config
+app.use(passport.initialize());
+app.use(passport.session());
+passportConfig(passport);
 
 // app listen
 app.listen(port, () => {

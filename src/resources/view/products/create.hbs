@@ -1,0 +1,32 @@
+<div class="row" style="width:400px; margin:auto">
+    <div class="d-flex justify-content-center">
+        <h1>New Product</h1>
+    </div>
+    <div class="d-flex justify-content-center align-items-center mt-4" style="width: 100%;">
+        <form id="create-form" method="post" action="/products" style="width:100%" enctype="multipart/form-data">
+            <div class="mb-3">
+                <label for="name" class="form-label">Name</label>
+                <input name="name" type="text-area" class="form-control" id="name" required>
+            </div>
+            <div class="mb-3">
+                <label for="image" class="form-label">Image</label>
+                <input name="image" type="file" class="form-control" id="image" style="padding-top: 11px;" required>
+            </div>
+            <div class="mb-3">
+                <label for="desciption" class="form-label">Description</label>
+                <textarea name="description" class="form-control" id="description" style="height: 84px; border-radius: 15px"></textarea>
+            </div>
+            <div class="mb-3 d-flex justify-content-between align-items-center">
+                <label for="price" class="form-label" style="margin: 0;">Price</label>
+                <input name="price" type="number" class="form-control" id="price" style="width: 30%; margin-right:5%;" required>
+                <label for="amount" class="form-label" style="margin: 0;">Amount</label>
+                <input name="amount" type="number" class="form-control" id="amount" style="width: 30%" required>
+            </div>
+            <button type="submit" class="accountBtn mt-4" style="width: 100%;">Create</button>
+            <div class="d-flex justify-content-center mt-2">
+                <a href="/account">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
+

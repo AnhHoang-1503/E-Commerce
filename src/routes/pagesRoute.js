@@ -3,14 +3,14 @@ import pagesController from "../app/controller/pagesController.js";
 
 const router = Router();
 
-router.route("/").get((req, res) => {
-    res.redirect("/pages/about");
-});
-
 router.route("/about").get(pagesController.about);
 
 router.route("/faq").get(pagesController.faq);
 
 router.route("/contact").get(pagesController.contact);
+
+router.route("/").get((req, res) => {
+    res.redirect("/pages/about");
+});
 
 export default router;

@@ -3,23 +3,23 @@
         <h1>Create Account</h1>
     </div>
     <div class="d-flex justify-content-center align-items-center" style="width: 100%;">
-        <form id="login-form" method="post" action="" style="width:100%">
+        <form id="register-form" method="post" action="" style="width:100%">
             <div class="mb-3">
                 <p>{{message}}</p>
                 <label for="firstName" class="form-label">First Name</label>
-                <input name="firstName" type="text" class="form-control" id="firstName">
+                <input name="firstName" type="text" class="form-control" id="firstName" required>
             </div>
             <div class="mb-3">
                 <label for="lastName" class="form-label">Last Name</label>
-                <input name="lastName" type="text" class="form-control" id="lastName">
+                <input name="lastName" type="text" class="form-control" id="lastName" required>
             </div>
             <div class="mb-3">
                 <label for="EmailLogin" class="form-label">Email</label>
-                <input name="email" type="text" class="form-control" id="EmailLogin">
+                <input name="email" type="text" class="form-control" id="EmailLogin" required>
             </div>
             <div class="mb-3">
                 <label for="password" class="form-label">Password</label>
-                <input name="password" type="password" class="form-control" id="password">
+                <input name="password" type="password" class="form-control" id="password" required>
             </div>
             <button type="submit" class="accountBtn mt-4" style="width: 100%;">Create</button>
         </form>
