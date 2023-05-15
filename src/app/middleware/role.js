@@ -6,7 +6,7 @@ function isAdmin(req, res, next) {
             res.redirect("/account");
         }
     } catch (error) {
-        next(error);
+        next();
     }
 }
 

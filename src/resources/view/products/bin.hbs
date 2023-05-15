@@ -4,8 +4,7 @@
             <input class="searchFieldAdminPanel" type="text" placeholder="Search">
             <i class="bi bi-search"></i>
         </div>
-        <a href="/products/bin" class="accountBtn" style="width: 200px; margin-left: auto"><i class="bi bi-recycle"></i>&#160;Recycle Bin</a>
-        <a href="/products/create" class="accountBtn" style="width: 200px; margin-left: 30px">Create +</a>
+        <a href="/account" class="accountBtn" style="width: 200px; margin-left: auto">Products</a>
     </div>
     <div class="mt-4 ms-2">
         <table class="table align-middle" style="text-align: center; vertical-align: middle;">
@@ -17,7 +16,6 @@
                 <th scope="col">Description</th>
                 <th scope="col">Price</th>
                 <th scope="col">Amount</th>
-                <th scope="col"></th>
                 <th scope="col"></th>
             </tr>
         </thead>
@@ -37,19 +35,15 @@
                 <td style="width: 10%;">${{this.price}}</td>
                 <td style="width: 10%;">{{this.amount}}</td>
                 <td style="width: 5%;">
-                    <a href="/products/{{this._id}}/edit">
-                        <button type="button" class="btn btn-info">Edit</button>
-                    </a>
-                </td>
-                <td style="width: 5%;">
-                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteProductModal" data-id="{{this._id}}">Delete</button>
+                    <form id="restoreForm" action="/products/{{this._id}}/restore" method="post">
+                        <button type="submit" class="btn btn-warning">Restore</button>
+                    </form>
                 </td>
             </tr>
         {{else}}
             <tr>
                 <td colspan="9" class="text-center justify-content-center">
-                    <h3 class="mb-4 mt-4">No products found</h3>
-                    <a href="/products/create" class="accountBtn" style="width: 20%; margin:auto">Create new product</a>
+                    <h3 class="mb-4 mt-4">No deleted products found</h3>
                 </td>
             </tr>
         {{/each}}
@@ -58,25 +52,4 @@
     </div>
 </div>
 
-<!-- Modal -->
-<div class="modal fade" id="deleteProductModal" tabindex="-1">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5">Delete warning</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        Are you sure you want to delete this product?
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-danger" id="deleteBtnModal">Delete</button>
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<form id="deleteForm" action="" method="post"></form>
-
-<script src="/script/adminPage.js"></script>
+<script src="/script/binPage.js"></script>

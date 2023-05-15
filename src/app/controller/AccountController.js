@@ -16,7 +16,7 @@ function login(req, res, next) {
             message: req.flash("messages")[0],
         });
     } catch (error) {
-        next(error);
+        next();
     }
 }
 
@@ -28,7 +28,7 @@ function register(req, res, next) {
             message: req.flash("messages")[0],
         });
     } catch (error) {
-        next(error);
+        next();
     }
 }
 
@@ -40,7 +40,7 @@ function resetPassword(req, res, next) {
             message: req.flash("messages")[0],
         });
     } catch (error) {
-        next(error);
+        next();
     }
 }
 
@@ -53,21 +53,21 @@ function index(req, res, next) {
             admin(req, res, next);
         }
     } catch (error) {
-        next(error);
+        next();
     }
 }
 
 // GET account/ role = admin
 async function admin(req, res, next) {
     try {
-        let products = await Product.find({});
+        let products = await Product.find({ deleted: false });
         mutipleMongooseToObject(products);
         res.render("account/admin", {
             title: "Acount",
             products: mutipleMongooseToObject(products),
         });
     } catch (error) {
-        next(error);
+        next();
     }
 }
 
@@ -102,7 +102,7 @@ async function registerPost(req, res, next) {
             res.redirect("/account/register");
         }
     } catch (error) {
-        next(error);
+        next();
     }
 }
 
@@ -113,7 +113,7 @@ function logout(req, res, next) {
             res.redirect("/account/login");
         });
     } catch (error) {
-        next(error);
+        next();
     }
 }
 
@@ -137,7 +137,7 @@ async function resetPasswordPatch(req, res, next) {
             })
             .catch(next);
     } catch (error) {
-        next(error);
+        next();
     }
 }
 

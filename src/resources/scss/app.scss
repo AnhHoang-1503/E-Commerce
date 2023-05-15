@@ -164,3 +164,46 @@ button {
 #file-upload-button {
     background-color: #fff;
 }
+
+td div {
+    word-wrap: break-word;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.form-check-input {
+    border: solid 1px #000;
+    height: 20px;
+    width: 20px;
+}
+
+.form-check {
+    margin-top: 4px;
+    padding-bottom: 4px;
+}
+
+#editImg {
+    display: none;
+}
+
+#curImg {
+    display: flex;
+}
+
+.searchFieldAdminPanel {
+    width: 100%;
+    height: 46px;
+    border-radius: 9999px;
+    padding: 15px;
+    border: solid 1px #000;
+}
+
+.searchFieldAdminPanel ~ i {
+    position: absolute;
+    font-size: 25px;
+    right: 15px;
+}
+
+.searchFieldAdminPanel ~ i:hover {
+    cursor: text;
+}

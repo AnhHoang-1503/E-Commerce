@@ -8,7 +8,6 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 // store image
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        console.log(req.dataFromidGenerator);
         cb(null, path.join(__dirname, "../../public/productsImg"));
     },
     filename: function (req, file, cb) {

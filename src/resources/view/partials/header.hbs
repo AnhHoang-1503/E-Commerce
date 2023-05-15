@@ -79,7 +79,7 @@
         <a href="/blog">
             <div class="fs-3" style="width: 100%;">Blog</div>
         </a>
-        <div id="acccountSideBar" class="mt-2">
+        <div id="acccountSideBar" class="mt-2" aria-valuetext="{{session.passport.user.email}}">
         </div>
         <form class="mt-4" action="">
             <input id="searchSideBar" type="text" placeholder="Search">
@@ -116,39 +116,6 @@
 {{!-- log out form --}}
 <form id="logoutForm" method="post" action="/account/logout"></form>
 
-<script>
-    if ("{{session.passport.user}}") {
-    acccountSideBar.innerHTML = `
-            <ul class="fs-4" style="font-weight: 300; padding-left: 0">
-                <li>
-                    <a href="/account">
-                        Account
-                    </a>
-                </li>
-                <li>
-                    <button type="submit" form="logoutForm">
-                        Log out
-                    </button>
-                </li>
-            </ul>
-            `;
-} else {
-    acccountSideBar.innerHTML = `
-            <ul class="fs-4" style="font-weight: 300; padding-left: 0">
-                <li>
-                    <a href="/account/login">
-                        Log in
-                    </a>
-                </li>
-                <li>
-                    <a href="/account/register">
-                        Create account
-                    </a>
-                </li>
-            </ul>
-            `;
-}
-</script>
 <script src="/script/header.js"></script>    
 
 

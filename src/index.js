@@ -13,6 +13,7 @@ import passport from "passport";
 import passportConfig from "./config/auth/passport.js";
 import methodOverride from "method-override";
 import flash from "connect-flash";
+import hbsHelpers from "./util/hbsHelpers.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const app = express();
@@ -23,6 +24,7 @@ app.engine(
     ".hbs",
     handlebars.engine({
         extname: ".hbs",
+        helpers: hbsHelpers,
     })
 );
 app.set("view engine", ".hbs");
