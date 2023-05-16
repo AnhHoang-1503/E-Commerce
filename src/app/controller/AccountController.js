@@ -61,7 +61,6 @@ function index(req, res, next) {
 async function admin(req, res, next) {
     try {
         let products = await Product.find({ deleted: false });
-        mutipleMongooseToObject(products);
         res.render("account/admin", {
             title: "Acount",
             products: mutipleMongooseToObject(products),

@@ -1,5 +1,5 @@
 <header>
-    <div class="searchField d-flex justify-content-center align-self-center">
+    <div class="searchField d-flex justify-content-center align-items-center">
         <i class="bi bi-search"></i>
         <input id="searchInput" type="text" placeholder="Search">
         <button id="closeSearchBtn" type="button" class="btn-close" style="margin-top: 5px;"></button>
@@ -29,6 +29,8 @@
         </div>
     </div>
     </nav>
+    <div id="resultSearch" class="row">
+    </div>
 </header>
 
 {{!-- Menu sidebar left --}}
@@ -81,8 +83,8 @@
         </a>
         <div id="acccountSideBar" class="mt-2" aria-valuetext="{{session.passport.user.email}}">
         </div>
-        <form class="mt-4" action="">
-            <input id="searchSideBar" type="text" placeholder="Search">
+        <form method="GET" class="mt-4" action="/search">
+            <input name="q" id="searchSideBar" type="text" placeholder="Search">
             <button>
                 <i class="bi bi-search" style="font-size: 24px;"></i>
             </button>
@@ -103,19 +105,48 @@
 
 {{!-- Cart side bar right --}}
 <div class="offcanvas offcanvas-end" tabindex="-1" id="cartSideBar">
-  <div class="offcanvas-header">
+  <div class="offcanvas-header" style="border-bottom: dashed 1px #000;">
     <h5 class="offcanvas-title fs-3" id="offcanvasExampleLabel">Your Cart</h5>
     <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
   </div>
-  <div class="offcanvas-body">
-    <div class="d-flex justify-content-center align-items-center fs-4" style="font-weight: 300;">
-        Your cart is currently empty.
-    </div>
+  <div class="offcanvas-body cartSideBarBody">
+    <div class="cart-side-bar-products">
+        {{#each session.cart}}
+            <div class="row" style="width: 95%;" value="{{this._id}}">
+                <div class="col-4">
+                    <img src="{{this.image}}" alt="productImg" style="width:100%; max-height: 200px; object-fit: contain;">
+                </div>
+                <div class="col-8 d-flex flex-column justify-content-start mt-2">
+                    <div class="d-flex justify-content-between mb-2">
+                        <div class="fs-4" style="font-weight: 300;">{{this.name}}</div>
+                        <div class="fs-4 product-price" style="font-weight: 300;">${{price this.price}}</div>
+                    </div>
+                    <div class="d-flex product-quantity justify-content-between mb-2">
+                        <input onchange="updateQuantity(event)" name="quantity" type="number" value="{{this.quantity}}">
+                    </div>
+                    <div class="d-flex justify-content-between mb-2">
+                        <a onclick="removeProduct(event)" class="remove-button" type="button" style="font-weight: 400;" id="{{this._id}}">Remove</a>
+                    </div>
+                </div>
+            </div>
+        {{else}}
+            <div class="d-flex justify-content-center align-items-center fs-4" style="font-weight: 300;">
+                Your cart is currently empty.
+            </div>
+        {{/each}}
+    </div> 
+    {{#if session.cart}}
+        <div class="check-out-cart-side-bar d-flex flex-column justify-content-end align-items-center" style="height: 180px; width: 100%">
+            <div class="mb-4 row" style="width: 90%;">
+                <h4 class="col">Subtotal</h4>
+                <h4 class="col total-price text-end"></h4>
+            </div>
+            <a href="/cart/checkout" class="accountBtn" style="width: 90%;">Check Out</a>
+        </div>
+    {{/if}}
   </div>
 </div>
 {{!-- log out form --}}
 <form id="logoutForm" method="post" action="/account/logout"></form>
 
 <script src="/script/header.js"></script>    
-
-

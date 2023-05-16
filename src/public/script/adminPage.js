@@ -1,11 +1,3 @@
-const productName = document.querySelectorAll("#productName");
-const productDescription = document.querySelectorAll("#productDescription");
-const deleteModal = document.getElementById("deleteProductModal");
-const deleteBtn = document.getElementById("deleteBtnModal");
-const deleteForm = document.getElementById("deleteForm");
-const searchFieldAdminPanel = document.querySelector(".searchFieldAdminPanel");
-const productsRow = document.querySelectorAll(".productsRow");
-
 // text handler
 function textHandler(element, textLimit) {
     let text = element.ariaValueText;
@@ -16,10 +8,13 @@ function textHandler(element, textLimit) {
     element.innerHTML = text;
 }
 
+const productName = document.querySelectorAll("#productName");
+const productDescription = document.querySelectorAll("#productDescription");
 productName.forEach((e) => textHandler(e, 100));
 productDescription.forEach((e) => textHandler(e, 200));
 
 // get id for delete modal
+const deleteModal = document.getElementById("deleteProductModal");
 let id;
 if (deleteModal) {
     deleteModal.addEventListener("show.bs.modal", (event) => {
@@ -29,12 +24,16 @@ if (deleteModal) {
 }
 
 // delete modal button
+const deleteBtn = document.getElementById("deleteBtnModal");
+const deleteForm = document.getElementById("deleteForm");
 deleteBtn.addEventListener("click", () => {
     deleteForm.action = `/products/${id}?_method=DELETE`;
     deleteForm.submit();
 });
 
 // search field
+const searchFieldAdminPanel = document.querySelector(".searchFieldAdminPanel");
+const productsRow = document.querySelectorAll(".productsRow");
 searchFieldAdminPanel.onkeyup = (e) => {
     productsRow.forEach((product) => {
         if (

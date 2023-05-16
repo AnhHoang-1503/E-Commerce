@@ -1,0 +1,28 @@
+<div style="width: 90%;">
+    <div class="d-flex justify-content-center align-items-center mb-4 flex-column">
+        <h1 style="font-size: 60px;">Search results</h1>
+        <div class="searchBox" style="width: 30%;">
+            <form method="GET" class="mt-4 d-flex align-items-center justify-content-center" action="/search" style="position: relative;">
+            <input name="q" id="searchSideBar" type="text" placeholder="Search" value="{{query}}">
+            <button style="position:absolute; right:15px;">
+                <i class="bi bi-search" style="font-size: 24px;"></i>
+            </button>
+        </form>
+        </div>
+    </div>
+    <div class="row" style="width: 90%: margin:auto">
+        {{#each products}}
+            <div class="collections-product col-lg-4 col-sm-6 col-xs-12 mt-4" style="flex-direction: column">
+                <a class=" d-flex justify-content-center align-items-center" href="/collections/{{this._id}}" style="flex-direction: column">
+                    <img src="{{this.image}}" alt="productImg" style="height: 300px">
+                    <h4 style="font-weight: 300;">{{this.name}}</h4>
+                    <h4 style="font-weight: 300;">${{price this.price}}</h4>
+                </a>
+            </div>
+        {{else}}
+            <div class="d-flex justify-content-center align-items-center">
+                <h3 >No results found for “{{query}}”. Check the spelling or use a different word or phrase.</h3>
+            </div>
+        {{/each}}
+    </div>
+</div>

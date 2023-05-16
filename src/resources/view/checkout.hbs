@@ -1,0 +1,12 @@
+<div class="d-flex align-items-center flex-column">
+    {{#each session.cart}}
+        <div class="row">
+            <div class="col-4">
+                <img src="{{this.image}}"> 
+            </div>
+            <div class="col-7">
+                {{this.name}}
+            </div>
+        </div>
+    {{/each}}
+</div>

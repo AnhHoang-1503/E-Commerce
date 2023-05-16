@@ -1,8 +1,3 @@
-const productName = document.querySelectorAll("#productName");
-const productDescription = document.querySelectorAll("#productDescription");
-const searchFieldAdminPanel = document.querySelector(".searchFieldAdminPanel");
-const productsRow = document.querySelectorAll(".productsRow");
-
 // text handler
 function textHandler(element, textLimit) {
     let text = element.ariaValueText;
@@ -13,10 +8,14 @@ function textHandler(element, textLimit) {
     element.innerHTML = text;
 }
 
+const productName = document.querySelectorAll("#productName");
+const productDescription = document.querySelectorAll("#productDescription");
 productName.forEach((e) => textHandler(e, 100));
 productDescription.forEach((e) => textHandler(e, 200));
 
 // search field
+const searchFieldAdminPanel = document.querySelector(".searchFieldAdminPanel");
+const productsRow = document.querySelectorAll(".productsRow");
 searchFieldAdminPanel.onkeyup = (e) => {
     productsRow.forEach((product) => {
         if (

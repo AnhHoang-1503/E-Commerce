@@ -1,0 +1,35 @@
+<div class="row mt-4" style="width: 95%;">
+    <div class="col-lg-6 col-sm-12">
+        <img src="{{product.image}}" alt="productImg" style="width:100%; max-height: 900px; object-fit: contain;">
+    </div>
+    <div class="col-lg-5 col-sm-10 d-flex align-items-start justify-content-center flex-column fs-4">
+        <div class="mb-4">
+            <h1>
+                {{product.name}}
+            </h1>
+        </div>
+        <div class="mb-4">
+            <p style="font-weight: 300;">
+                {{product.description}}
+            </p>
+        </div>
+        <div clss="mb-4">
+            <p>
+                ${{price product.price}}
+            </p>
+        </div>
+        <div class="mb-4 mt-4" style="width: 100%">
+            {{#checkAmount product.amount}}
+            <button type="button" class="add-to-cart accountBtn" style="width: 100%" value="{{product._id}}">
+                Add to Cart - ${{price product.price}}
+            </button>
+            {{else}}
+            <button type="button" class="accountBtn" style="width: 100%" value="{{product._id}}">
+                Out of Stock
+            </button>
+            {{/checkAmount}}
+        </div>
+    </div>
+</div>
+
+<script src="/script/detail.js"></script>

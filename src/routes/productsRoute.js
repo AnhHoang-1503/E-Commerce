@@ -18,17 +18,7 @@ router
 router
     .route("/:id/edit")
     .get(checkLogined, isAdmin, productsController.edit)
-    .patch(
-        checkLogined,
-        isAdmin,
-        (req, res, next) => {
-            req.objectId = req.params.id;
-            console.log(req.objectId);
-            next();
-        },
-        storeImg,
-        productsController.update
-    );
+    .patch(checkLogined, isAdmin, storeImg, productsController.update);
 
 router
     .route("/:id")
