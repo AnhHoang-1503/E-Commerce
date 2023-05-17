@@ -1,4 +1,5 @@
 import Product from "../models/productModel.js";
+import User from "../models/userModel.js";
 import { mongooseToObject } from "../../util/mongoose.js";
 
 // POST /cart/add/:id
@@ -53,7 +54,6 @@ async function remove(req, res, next) {
         req.session.cart.forEach((product) => {
             totalPrice += product.price * product.quantity;
         });
-        console.log(req.session.cart);
         res.json({ totalPrice });
     } catch (error) {
         next();
@@ -74,20 +74,49 @@ async function update(req, res, next) {
         req.session.cart.forEach((product) => {
             totalPrice += product.price * product.quantity;
         });
-        console.log(req.session.cart);
         res.json({ totalPrice });
     } catch (error) {
         next();
     }
 }
 
+// GET /cart/checkout
 function checkout(req, res, next) {
     try {
-        console.log(res.locals.session);
-        res.render("checkout", { title: "Checkout" });
+        res.render("cart/checkout", { title: "Checkout" });
     } catch (error) {
         next();
     }
 }
 
-export default { add, remove, update, checkout };
+// GET /cart/checkout/success
+function success(req, res, next) {
+    try {
+        res.render("cart/success", { title: "Success" });
+    } catch (error) {
+        next();
+    }
+}
+
+// POST /cart/checkout
+async function payCheckout(req, res, next) {
+    try {
+        let user;
+        if (
+            req.session.passport != undefined &&
+            req.session.passport.user.role == "user"
+        ) {
+            user = await User.findOne({
+                email: req.session.passport.user.email,
+            });
+            user.purchaseHistory.push(...req.session.cart);
+            await User.findOneAndUpdate({ email: user.email }, user);
+            req.session.cart = [];
+        }
+        res.json({ message: "pay checkout", user });
+    } catch (error) {
+        next();
+    }
+}
+
+export default { add, remove, update, checkout, payCheckout, success };

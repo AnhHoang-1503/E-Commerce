@@ -8,6 +8,7 @@ const UserSchema = new Schema(
         lastName: { type: String, required: true },
         role: { type: String, required: true },
         deleted: { type: Boolean, default: false },
+        purchaseHistory: { type: Array, default: [] },
     },
     {
         collection: "users",

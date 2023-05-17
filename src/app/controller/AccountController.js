@@ -48,7 +48,7 @@ function resetPassword(req, res, next) {
 function index(req, res, next) {
     try {
         if (res.locals.session.passport.user.role === "user") {
-            res.render("account/user", { title: "Acount" });
+            user(req, res, next);
         } else {
             admin(req, res, next);
         }
@@ -64,6 +64,21 @@ async function admin(req, res, next) {
         res.render("account/admin", {
             title: "Acount",
             products: mutipleMongooseToObject(products),
+        });
+    } catch (error) {
+        next();
+    }
+}
+
+// GET account/ role = user
+async function user(req, res, next) {
+    try {
+        let user = await User.findOne({
+            email: res.locals.session.passport.user.email,
+        });
+        res.render("account/user", {
+            title: "Account",
+            user: mongooseToObject(user),
         });
     } catch (error) {
         next();
