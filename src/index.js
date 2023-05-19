@@ -5,7 +5,7 @@ import { dirname } from "path";
 import { fileURLToPath } from "url";
 import path from "path";
 import handlebars from "express-handlebars";
-import logger from "morgan";
+// import logger from "morgan";
 import router from "./routes/indexRoute.js";
 import connect from "./config/db/connectDb.js";
 import session from "express-session";
