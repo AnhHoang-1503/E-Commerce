@@ -17,7 +17,7 @@ import hbsHelpers from "./util/hbsHelpers.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3001;
 
 // set view
 app.engine(
@@ -41,7 +41,7 @@ app.use(
     })
 );
 app.use(express.static(path.join(__dirname, "public"))); // set static file
-app.use(logger(":method :url")); // set logger
+// app.use(logger(":method :url")); // set logger
 app.use(methodOverride("_method")); // set method override
 app.use(flash()); // set flash
 app.use(function (req, res, next) {
