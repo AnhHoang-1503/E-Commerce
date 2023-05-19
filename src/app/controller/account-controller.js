@@ -1,6 +1,6 @@
-import Login from "../models/loginModel.js";
-import User from "../models/userModel.js";
-import Product from "../models/productModel.js";
+import Login from "../models/login-model.js";
+import User from "../models/user-model.js";
+import Product from "../models/product-model.js";
 import hasher from "../../util/hasher.js";
 import {
     mutipleMongooseToObject,
@@ -35,7 +35,7 @@ function register(req, res, next) {
 // GET account/rspass
 function resetPassword(req, res, next) {
     try {
-        res.render("account/resetPassword", {
+        res.render("account/reset-password", {
             title: "Reset password",
             message: req.flash("messages")[0],
         });

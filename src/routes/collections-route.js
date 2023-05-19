@@ -1,4 +1,4 @@
-import collectionsController from "../app/controller/collectionsController.js";
+import collectionsController from "../app/controller/collections-controller.js";
 import { Router } from "express";
 
 const router = Router();

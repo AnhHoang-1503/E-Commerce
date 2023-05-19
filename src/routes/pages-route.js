@@ -1,5 +1,5 @@
 import { Router } from "express";
-import pagesController from "../app/controller/pagesController.js";
+import pagesController from "../app/controller/pages-controller.js";
 
 const router = Router();
 

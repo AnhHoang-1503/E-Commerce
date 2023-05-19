@@ -1,7 +1,7 @@
 import LocalStrategy from "passport-local";
-import Login from "../../app/models/loginModel.js";
+import Login from "../../app/models/login-model.js";
 import hasher from "../../util/hasher.js";
-import User from "../../app/models/userModel.js";
+import User from "../../app/models/user-model.js";
 
 function passportConfig(passport) {
     // passport session setup

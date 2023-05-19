@@ -6,14 +6,14 @@ import { fileURLToPath } from "url";
 import path from "path";
 import handlebars from "express-handlebars";
 // import logger from "morgan";
-import router from "./routes/indexRoute.js";
-import connect from "./config/db/connectDb.js";
+import router from "./routes/index-route.js";
+import connect from "./config/db/connect-db.js";
 import session from "express-session";
 import passport from "passport";
 import passportConfig from "./config/auth/passport.js";
 import methodOverride from "method-override";
 import flash from "connect-flash";
-import hbsHelpers from "./util/hbsHelpers.js";
+import hbsHelpers from "./util/hbs-helpers.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const app = express();

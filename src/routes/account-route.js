@@ -1,7 +1,7 @@
 import { Router } from "express";
-import accountController from "../app/controller/accountController.js";
+import accountController from "../app/controller/account-controller.js";
 import passport from "passport";
-import checkLogined from "../app/middleware/checkLogined.js";
+import checkLogined from "../app/middleware/check-logined.js";
 
 const router = Router();
 

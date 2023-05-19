@@ -1,4 +1,4 @@
-import searchController from "../app/controller/searchController.js";
+import searchController from "../app/controller/search-controller.js";
 import { Router } from "express";
 
 const router = Router();
