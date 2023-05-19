@@ -6,4 +6,4 @@ npm install
 
 Start Command:
 
-npm run dev
+npm start
