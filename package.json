@@ -8,7 +8,7 @@
         "node": "18.12.0"
     },
     "scripts": {
-        "start": "sass src/resources/scss/:src/public/css && node src/index.js",
+        "start": "node src/index.js",
         "devstart": "nodemon --inspect src/index.js && sass -w src/resources/scss/:src/public/css/",
         "watch": "sass -w src/resources/scss/:src/public/css/",
         "dev": "concurrently --kill-others \"npm run devstart\" \"npm run watch\"",
